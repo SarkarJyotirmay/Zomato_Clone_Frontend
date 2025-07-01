@@ -26,7 +26,7 @@ const UserProfileForm = () => {
         nickname: userProfile.nickname || "",
         description: userProfile.description || "",
         preferences: userProfile.preferences || [],
-        dob: userProfile.dob || "",
+        dob: userProfile.dob.slice(0,10) || "",
         gender: userProfile.gender || "",
       });
     }
@@ -53,7 +53,13 @@ const UserProfileForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axiosInstance.post(`/user/update-profile`, formData);
+      console.log("User Profile Form data", formData);
+      
+      const res = await axiosInstance.post(`/user/update-profile`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
       if (res.data.success) {
         dispatch(setUserProfile(res.data.userProfile));
         alert("Profile updated successfully");

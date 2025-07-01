@@ -34,6 +34,12 @@ const dispatch = useDispatch()
         >
           User Profile
         </Link>
+        <Link
+          to="/contact"
+          className="flex bg-white items-center font-bold hover:text-orange-500"
+        >
+          Contact Us
+        </Link>
         <Button
           onClick={() => handleLogOut()}
           className="flex w-full  items-center px-3 font-bold hover:bg-gray-500"

@@ -1,7 +1,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import UserMenu from "./UserMenu"
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 const DesktopNav = () => {
     const navigate = useNavigate()
@@ -10,7 +10,13 @@ const DesktopNav = () => {
     <>
       <span className="flex space-x-2 items-center">
         {user ? (
+          <>
+          <span className="flex space-x-2 text-lg">
+         <Link to="/contact">Contact</Link>
+         <Link to="/settings">Settings</Link>
+          </span>
           <UserMenu />
+          </>
         ) : (
           <Button
             variant="ghost"

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
-  import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 import { useDispatch } from "react-redux";
 import { setUser } from "../store/slices/userSlice";
 import { useNavigate } from "react-router-dom";
@@ -9,30 +9,33 @@ import { Link } from "react-router-dom";
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     }));
   };
 
-   const notify = () => toast.success("Login Successful");
+  const notify = () => toast.success("Login Successful");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
     // 👉 Write your login API logic here
-   const response = await axiosInstance.post(`/user/login`, formData)
-   console.log(response.data.user);
-   localStorage.setItem("token", response.data.token)
-   dispatch(setUser(response.data.user))
-   setFormData({ email: "", password: "" })
-   notify()
-   navigate("/")
-
+    const response = await axiosInstance.post(`/user/login`, formData, {
+      headers: {
+        "Content-Type": "application/json", // for raw JSON body
+      },
+    });
+    console.log(response.data.user);
+    localStorage.setItem("token", response.data.token);
+    dispatch(setUser(response.data.user));
+    setFormData({ email: "", password: "" });
+    notify();
+    navigate("/");
   };
 
   return (
@@ -66,7 +69,10 @@ const Login = () => {
         </div>
 
         <div className="mb-6">
-          <label htmlFor="password" className="text-sm text-gray-300 block mb-1">
+          <label
+            htmlFor="password"
+            className="text-sm text-gray-300 block mb-1"
+          >
             Password
           </label>
           <input
@@ -87,7 +93,15 @@ const Login = () => {
         >
           Sign In
         </button>
-        <p className="text-gray-200 my-2 text-center">Don't have an account? <Link className="text-blue-500 hover:text-blue700 font-semibold" to={"/signup"}>Sign Up</Link></p>
+        <p className="text-gray-200 my-2 text-center">
+          Don't have an account?{" "}
+          <Link
+            className="text-blue-500 hover:text-blue700 font-semibold"
+            to={"/signup"}
+          >
+            Sign Up
+          </Link>
+        </p>
       </form>
     </div>
   );

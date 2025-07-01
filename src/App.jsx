@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserProfile from "./pages/UserProfile";
+import ManageRestaurntPage from "./pages/ManageRestaurntPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -84,10 +85,18 @@ function App() {
           element: <Signup />,
         },
         {
-          path: "/profile",
+          path: "/user-profile",
           element: (
             <ProtectedRoute>
               <UserProfile />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/manage-restaurant",
+          element: (
+            <ProtectedRoute>
+              <ManageRestaurntPage />
             </ProtectedRoute>
           ),
         },

@@ -39,7 +39,11 @@ const Signup = () => {
     e.preventDefault();
     try {
       // 👉 Write your signup API logic here
-      const responsse = await axiosInstance.post(`/user/register`, formData)
+      const responsse = await axiosInstance.post(`/user/register`, formData, {
+        headers: {
+          "Content-Type": "application/json", // ✅ Required for raw JSON body
+        },
+      });
       console.log(formData);
       toast.success("Signup successful!");
       navigate("/login");
