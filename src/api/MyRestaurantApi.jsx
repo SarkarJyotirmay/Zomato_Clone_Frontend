@@ -93,3 +93,40 @@ export const useUpdateMyRestaurant = () => {
 
   return { updateRestaurant, isLoading, isError, error };
 };
+
+// ! search for restaurants
+export const useSearchRestaurants = (searchState, city) => {
+  const createSearchrequest = async () => {
+    const params = new URLSearchParams()
+    params.set("searchQuery", searchState.searchQuery)
+    params.set("page", searchState.page.toString())
+    params.set("selectedCuisines", searchState.selectedCuisines.join(","))
+    params.set("sortOption", searchState.sortOption)
+
+    const response = await axiosInstance.get(`/restaurant/list/${city}/?${params.toString()}`);
+    if (!response.data.success) {
+      throw new Error("Failed to get restaurant");
+    }
+    return response.data;
+  };
+  const {
+    data: results,
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["searchRestaurants", searchState],
+    queryFn: createSearchrequest,
+    enabled: !!city,
+  });
+
+  return { results, isPending };
+  // result will have  success: true,
+  // {
+  // data: restaurants,
+  // pagination: {
+  //   total,
+  //   page,
+  //   pages: Math.ceil(total / pageSize),
+  // }
+};

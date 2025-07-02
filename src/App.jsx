@@ -14,6 +14,7 @@ import Signup from "./pages/Signup";
 import ProtectedRoute from "./components/ProtectedRoute";
 import UserProfile from "./pages/UserProfile";
 import ManageRestaurntPage from "./pages/ManageRestaurntPage";
+import SearchPage from "./pages/SearchPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -97,6 +98,14 @@ function App() {
           element: (
             <ProtectedRoute>
               <ManageRestaurntPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/search/:city",
+          element: (
+            <ProtectedRoute>
+              <SearchPage />
             </ProtectedRoute>
           ),
         },
