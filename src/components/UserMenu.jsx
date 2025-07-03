@@ -42,7 +42,7 @@ const UsernameMenu = () => {
         <DropdownMenuItem asChild>
           <Link
             to="/manage-restaurant"
-            className="block px-3 py-2 text-slate-100 rounded hover:bg-orange-500 hover:text-white transition"
+            className="block px-3 py-2 text-slate-100 rounded hover:bg-orange-500 hover:text-white transition z-50"
           >
             Manage Restaurant
           </Link>

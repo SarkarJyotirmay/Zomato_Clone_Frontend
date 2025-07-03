@@ -37,7 +37,7 @@ export const useCreateMyRestaurant = () => {
   return { createRestaurant, isLoading };
 };
 
-//! Get pre stored restautant
+//! Get pre stored restautant -> created by user -> shown in ManageRestaurant page -> to prepopulate data
 export const useGetMyRestaurant = () => {
   const getMyRestaurant = async () => {
     try {
@@ -97,13 +97,15 @@ export const useUpdateMyRestaurant = () => {
 // ! search for restaurants
 export const useSearchRestaurants = (searchState, city) => {
   const createSearchrequest = async () => {
-    const params = new URLSearchParams()
-    params.set("searchQuery", searchState.searchQuery)
-    params.set("page", searchState.page.toString())
-    params.set("selectedCuisines", searchState.selectedCuisines.join(","))
-    params.set("sortOption", searchState.sortOption)
+    const params = new URLSearchParams();
+    params.set("searchQuery", searchState.searchQuery);
+    params.set("page", searchState.page.toString());
+    params.set("selectedCuisines", searchState.selectedCuisines.join(","));
+    params.set("sortOption", searchState.sortOption);
 
-    const response = await axiosInstance.get(`/restaurant/list/${city}/?${params.toString()}`);
+    const response = await axiosInstance.get(
+      `/restaurant/list/${city}/?${params.toString()}`
+    );
     if (!response.data.success) {
       throw new Error("Failed to get restaurant");
     }
@@ -129,4 +131,33 @@ export const useSearchRestaurants = (searchState, city) => {
   //   page,
   //   pages: Math.ceil(total / pageSize),
   // }
+};
+
+// ! get restaurant by id -> shown on restaurant details part
+export const useGetRestaurantById = (restaurantId) => {
+  const getMyRestaurantByIdRequest = async () => {
+    try {
+      const response = await axiosInstance.get(`/restaurant/by-id/${restaurantId}`);
+      if (!response.data.success) {
+        throw new Error("Failed to get restaurant");
+      }
+      return response.data;
+    } catch (error) {
+      console.log(`Failed to get restaurant by id: `, error);
+      throw error;
+    }
+  };
+
+  const {
+    data: restaurant,
+    isPending,
+    isError,
+    error,
+  } = useQuery({
+    queryKey: ["fetchRestaurant", restaurantId], // ✅ important
+    queryFn: getMyRestaurantByIdRequest,
+    enabled: !!restaurantId, // ✅ avoids running query if id is undefined/null
+  });
+
+  return { restaurant, isPending, isError, error };
 };

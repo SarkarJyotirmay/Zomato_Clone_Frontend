@@ -14,6 +14,7 @@ const DesktopNav = () => {
           <span className="flex space-x-2 text-lg">
          <Link to="/contact">Contact</Link>
          <Link to="/settings">Settings</Link>
+         <Link to="/cart">Cart</Link>
           </span>
           <UserMenu />
           </>

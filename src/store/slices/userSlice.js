@@ -21,6 +21,7 @@ const userSlice = createSlice({
     },
     setUserProfile: (state, action) => {
       state.userProfile = action.payload;
+      state.loading = false
     }
   }
 });

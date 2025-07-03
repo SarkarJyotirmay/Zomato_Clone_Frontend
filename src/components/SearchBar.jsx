@@ -16,7 +16,7 @@ const SearchBar = ({ onSubmit, onReset, placeHolder, searchQuery }) => {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      searchQuery, // ✅ Always define defaultValues to avoid uncontrolled input warnings coming from prop
+      searchQuery: searchQuery ?? "", // ✅ Always define defaultValues to avoid uncontrolled input warnings coming from prop
     },
   });
 

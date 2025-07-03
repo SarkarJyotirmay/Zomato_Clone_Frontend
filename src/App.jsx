@@ -15,6 +15,10 @@ import ProtectedRoute from "./components/ProtectedRoute";
 import UserProfile from "./pages/UserProfile";
 import ManageRestaurntPage from "./pages/ManageRestaurntPage";
 import SearchPage from "./pages/SearchPage";
+import DetailPage from "./pages/DetailPage";
+import CartPage from "./pages/CartPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import OrdersPage from "./pages/OrdersPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -102,10 +106,42 @@ function App() {
           ),
         },
         {
-          path: "/search/:city",
+          path: "/search/:city", //searches restaurants
           element: (
             <ProtectedRoute>
               <SearchPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/detail/:id", //searches restaurant by detail
+          element: (
+            <ProtectedRoute>
+              <DetailPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/cart", //searches restaurant by detail
+          element: (
+            <ProtectedRoute>
+              <CartPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/checkout", //searches restaurant by detail
+          element: (
+            <ProtectedRoute>
+              <CheckoutPage />
+            </ProtectedRoute>
+          ),
+        },
+        {
+          path: "/orders", //searches restaurant by detail
+          element: (
+            <ProtectedRoute>
+              <OrdersPage />
             </ProtectedRoute>
           ),
         },

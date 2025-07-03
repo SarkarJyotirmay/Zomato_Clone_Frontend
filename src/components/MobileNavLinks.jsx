@@ -40,6 +40,12 @@ const dispatch = useDispatch()
         >
           Contact Us
         </Link>
+        <Link
+          to="/cart"
+          className="flex bg-white items-center font-bold hover:text-orange-500"
+        >
+          Cart
+        </Link>
         <Button
           onClick={() => handleLogOut()}
           className="flex w-full  items-center px-3 font-bold hover:bg-gray-500"
