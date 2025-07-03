@@ -56,13 +56,20 @@ const CartPage = () => {
     0
   );
 
+  useEffect(()=>{
+    console.log(isLoading, isRestaurantLoading);
+    
+    console.log(items);
+    
+  }, [items])
+
   const cartTotal = cartSubtotal + deliveryPrice * 100; // delivery price is in rupees, convert to paise
 
   return (
     <div className="max-w-4xl mx-auto py-8 px-4">
       <h2 className="text-2xl font-bold mb-6">Your Cart</h2>
 
-      {isLoading || isRestaurantLoading ? (
+      {isLoading  ? (
         <p className="text-gray-600 animate-pulse">Loading cart...</p>
       ) : items.length === 0 ? (
         <p className="text-gray-500">Your cart is empty.</p>
