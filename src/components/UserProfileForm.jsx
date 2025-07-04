@@ -7,8 +7,8 @@ const preferencesList = ["Veg", "Non veg", "Italic", "Continental", "Chinese"];
 
 const UserProfileForm = () => {
   const dispatch = useDispatch();
-  const userProfile = useSelector((state) => state.user.userProfile);
-  const user = useSelector((state) => state.user.user); // To get email from login
+  const {userProfile} = useSelector((state) => state.user);
+  const {user} = useSelector((state) => state.user); 
 
   const [formData, setFormData] = useState({
     email: user?.email || "",
@@ -26,7 +26,7 @@ const UserProfileForm = () => {
         nickname: userProfile.nickname || "",
         description: userProfile.description || "",
         preferences: userProfile.preferences || [],
-        dob: userProfile.dob.slice(0,10) || "",
+        dob: userProfile.dob ? userProfile.dob.slice(0, 10) : "",
         gender: userProfile.gender || "",
       });
     }
