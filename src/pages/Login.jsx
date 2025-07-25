@@ -23,6 +23,8 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log("handlesubmit run");
+
     setError("");
     // 👉 Write your login API logic here
     const response = await axiosInstance.post(`/user/login`, formData, {
@@ -30,12 +32,17 @@ const Login = () => {
         "Content-Type": "application/json", // for raw JSON body
       },
     });
-    console.log(response.data.user);
-    localStorage.setItem("token", response.data.token);
-    dispatch(setUser(response.data.user));
-    setFormData({ email: "", password: "" });
-    notify();
-    navigate("/");
+    console.log(response.data);
+    if (!response.data.success) {
+      toast.error("Wrong Username or passwrod, please try again");
+      return;
+    } else {
+      localStorage.setItem("token", response.data.token);
+      dispatch(setUser(response.data.user));
+      setFormData({ email: "", password: "" });
+      notify();
+      navigate("/");
+    }
   };
 
   return (

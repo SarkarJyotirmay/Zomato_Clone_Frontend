@@ -56,6 +56,24 @@ const UsernameMenu = () => {
             User Profile
           </Link>
         </DropdownMenuItem>
+{/*  */}
+        <DropdownMenuItem asChild>
+          <Link
+            to="/contact"
+            className="block px-3 py-2 text-slate-100 rounded hover:bg-orange-500 hover:text-white transition"
+          >
+            Contact us
+          </Link>
+        </DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
+          <Link
+            to="/order-status"
+            className="block px-3 py-2 text-slate-100 rounded hover:bg-orange-500 hover:text-white transition"
+          >
+            Order status
+          </Link>
+        </DropdownMenuItem>
 
         <DropdownMenuSeparator className="my-1 border-t border-slate-600" />
 
